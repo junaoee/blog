@@ -54,15 +54,23 @@
     src: url('/fonts/GeistMono.woff2') format('woff2');
     font-display: swap;
   }
+
+  /* 中文字体 MiSans（已截取常用汉字 + 英文，约 2.4MB） */
+  @font-face {
+    font-family: 'MiSans';
+    src: url('/fonts/MiSansVF.woff2') format('woff2');
+    font-weight: 150 700;
+    font-display: swap;
+  }
 }
 
 /* ===== 颜色变量 ===== */
 @layer base {
   :root {
     /* 字体族 */
-    --font-lexend: 'Lexend', 'Geist', 'ShangguSansSC-VF', ui-sans-serif, system-ui, sans-serif;
-    --font-sans: 'Geist', 'ShangguSansSC-VF', ui-sans-serif, system-ui, sans-serif;
-    --font-geist-mono: 'GeistMono', 'Input Mono', 'Fira Code', 'ShangguSansSC-VF', monospace;
+    --font-lexend: 'MiSans', 'Lexend', 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'MiSans', 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-geist-mono: 'GeistMono', 'Input Mono', 'Fira Code', 'MiSans', monospace;
 
     /* 基础色调 */
     --background: 255 100% 100%;
