@@ -21,36 +21,48 @@ if (hasPinnedPosts) {
 } else {
   showPosts = await getNumPosts(size)
 }
+
+// 所有社交图标都显示；没填地址的以灰色虚化呈现，且不可点击
+const hasUrl = (item: (typeof SOCIAL_LINKS)[number]) => Boolean(item.url && item.url.trim() !== '')
+const NAME_LABELS: Record<string, string> = {
+  github: 'GitHub',
+  twitter: 'X',
+  bilibili: '哔哩哔哩',
+  mastodon: 'Mastodon',
+  mail: '邮箱',
+}
 ---
 
-<Layout title="Readme" description={SITE.description}>
+<Layout title="首页" description={SITE.description}>
   <div class="relative z-[1]">
     <div class="py-8 pb-10 px-6 sm:px-8">
       <h1 class="flex flex-col gap-2">
-        <span class="text-4xl sm:text-5xl tracking-tight"> Litos </span>
+        <span class="text-4xl sm:text-5xl tracking-tight"> {SITE.title} </span>
         <span class="text-muted-foreground font-light text-xl sm:text-2xl block tracking-wide text-balance">
-          A Simple & Modern Blog Theme for Astro
+          {SITE.description}
         </span>
       </h1>
-      <div class="pro text-muted-foreground text-pretty">
-        <p>
-          Litos is a clean and modern Astro blog theme focused on content presentation and reading experience. More than just a blog, it's a
-          personal space to showcase your skills, projects, and life.
-        </p>
-        <p>
-          Built with Tailwind CSS for elegant responsive design and React components for smooth interactions. Features light/dark theme
-          switching, multiple article layouts, GitHub contribution charts, and more. Inspired by
-          <a href="https://github.com/needim" target="_blank" rel="nofollow noreferrer">@needim</a>, redesigned by
-          <a href="https://github.com/Dnzzk2" target="_blank" rel="nofollow noreferrer">@Dnzzk2</a> based on Astro.
-        </p>
-      </div>
-      <div class="mt-6 flex gap-6">
-        {
-          SOCIAL_LINKS.map((item) => {
-            return <SocialLink href={item.url} icon={item.icon} aria-label={`Link of ${item.name}`} count={item.count} label="followers" />
-          })
-        }
-      </div>
+      {
+        SOCIAL_LINKS.length > 0 && (
+          <div class="mt-6 flex gap-6">
+            {SOCIAL_LINKS.map((item) => {
+              const enabled = hasUrl(item)
+              const displayName = NAME_LABELS[item.name] ?? item.name
+              return (
+                <SocialLink
+                  href={enabled ? item.url : undefined}
+                  icon={item.icon}
+                  aria-label={enabled ? displayName : `${displayName}（暂未添加地址）`}
+                  title={enabled ? displayName : `${displayName} 暂未添加地址`}
+                  count={enabled ? item.count : undefined}
+                  label="followers"
+                  class={!enabled ? 'opacity-40 cursor-default pointer-events-none' : undefined}
+                />
+              )
+            })}
+          </div>
+        )
+      }
     </div>
     {
       ENABLED && (
@@ -58,8 +70,8 @@ if (hasPinnedPosts) {
           <SectionDivider />
           <div class="py-8 pb-10 px-6 max-md:px-6">
             <div class="px-2 max-md:px-0">
-              <h2 class="text-2xl sm:text-3xl">Spotlight</h2>
-              <p class="text-muted-foreground mb-6 mt-1">GitHub contributions in the past year:</p>
+              <h2 class="text-2xl sm:text-3xl">近一年贡献</h2>
+              <p class="text-muted-foreground mb-6 mt-1">GitHub 上的提交记录：</p>
             </div>
             <GithubContributions username={GITHUB_USERNAME} tooltipEnabled={TOOLTIP_ENABLED} client:load transition:animate="none" />
           </div>
@@ -72,8 +84,8 @@ if (hasPinnedPosts) {
           <SectionDivider />
           <div class="py-8 pb-10 px-6 max-md:px-6">
             <div class="px-2 max-md:px-0">
-              <h2 class="text-2xl sm:text-3xl tracking-tight">Skills</h2>
-              <p class="text-muted-foreground mb-6 mt-1">It's not just skills, but also tools:</p>
+              <h2 class="text-2xl sm:text-3xl tracking-tight">AI 工具</h2>
+              <p class="text-muted-foreground mb-6 mt-1">日常在用的 AI 工具：</p>
             </div>
             <SkillsShowcase skillsData={SKILLS_DATA} />
           </div>
@@ -82,10 +94,10 @@ if (hasPinnedPosts) {
     }
     <SectionDivider />
     <div class="py-8 pb-10 px-6 sm:px-8">
-      <h2 class="text-2xl sm:text-3xl tracking-tight">Posts</h2>
+      <h2 class="text-2xl sm:text-3xl tracking-tight">{POSTS_CONFIG.title}</h2>
       <p class="text-muted-foreground mb-6 mt-1">
-        {hasPinnedPosts ? `Pinned` : 'Recent'}
-        {showPosts.length} posts, worth a look.
+        {hasPinnedPosts ? '置顶' : '最新'}
+        {showPosts.length} 篇文章。
       </p>
       <List posts={showPosts} {type} coverLayout={POSTS_CONFIG.homePageConfig?.coverLayout} />
     </div>

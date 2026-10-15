@@ -257,6 +257,22 @@ export interface GitalkConfig {
   enableHotKey?: boolean
 }
 
+export interface GiscusConfig {
+  repo: string
+  repoId: string
+  category: string
+  categoryId: string
+  mapping?: 'pathname' | 'url' | 'title' | 'og:title' | 'specific' | 'number'
+  strict?: '0' | '1'
+  reactionsEnabled?: '0' | '1'
+  emitMetadata?: '0' | '1'
+  inputPosition?: 'top' | 'bottom'
+  lang?: string
+  loading?: 'lazy' | 'eager'
+  term?: string
+  dataPrefix?: string
+}
+
 export interface AnalyticsConfig {
   vercount?: {
     enabled: boolean
@@ -274,6 +290,7 @@ export interface AnalyticsConfig {
 
 export interface CommentConfig {
   enabled: boolean
-  system: 'gitalk' | 'artalk' | 'waline' | 'none'
+  system: 'gitalk' | 'giscus' | 'artalk' | 'waline' | 'none'
   gitalk?: GitalkConfig
+  giscus?: GiscusConfig
 }

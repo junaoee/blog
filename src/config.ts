@@ -14,13 +14,12 @@ import type {
 
 //--- Readme Page Config ---
 export const SITE: Site = {
-  title: 'Litos',
-  description:
-    'Litos is a modern blogging theme built on Astro.js, designed for developers. It supports multiple post layouts, photo displays, project displays, and more, providing an elegant user experience and powerful customization capabilities.',
-  website: 'https://litos.vercel.app/',
-  lang: 'en',
+  title: 'JunBlog',
+  description: '个人博客，记录阅读、技术与日常。',
+  website: 'https://junaoe.dev',
+  lang: 'zh',
   base: '/',
-  author: 'Dnzzk2',
+  author: 'junaoe',
   ogImage: '/og-image.webp',
   transition: false,
   themeAnimation: true,
@@ -28,59 +27,65 @@ export const SITE: Site = {
 
 export const HEADER_LINKS: Link[] = [
   {
-    name: 'Posts',
+    name: '文章',
     url: '/posts',
   },
   {
-    name: 'Projects',
+    name: '项目',
     url: '/projects',
   },
   {
-    name: 'Photos',
+    name: '相册',
     url: '/photos',
   },
 ]
 
 export const FOOTER_LINKS: Link[] = [
   {
-    name: 'Readme',
+    name: '首页',
     url: '/',
   },
   {
-    name: 'Posts',
+    name: '文章',
     url: '/posts',
   },
   {
-    name: 'Projects',
+    name: '项目',
     url: '/projects',
   },
   {
-    name: 'Tags',
+    name: '标签',
     url: '/tags',
   },
   {
-    name: 'Photos',
+    name: '相册',
     url: '/photos',
   },
 ]
 
 // get icon https://icon-sets.iconify.design/
+// 填上你的账号地址即可显示；留空字符串则自动隐藏
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: 'github',
-    url: 'https://github.com/Dnzzk2',
+    url: 'https://github.com/junaoee',
     icon: 'icon-[ri--github-fill]',
-    count: 20,
   },
   {
     name: 'twitter',
-    url: 'https://x.com/yourname',
+    url: 'https://x.com/junaoe',
     icon: 'icon-[ri--twitter-x-fill]',
   },
   {
+    // 暂时不显示，之后填上地址就会自动出现
     name: 'bilibili',
-    url: 'https://space.bilibili.com/yourSpaceId',
+    url: '',
     icon: 'icon-[ri--bilibili-fill]',
+  },
+  {
+    name: 'mail',
+    url: '',
+    icon: 'icon-[ri--mail-fill]',
   },
 ]
 
@@ -101,34 +106,19 @@ export const SKILLSSHOWCASE_CONFIG: SkillsShowcaseConfig = {
       direction: 'left',
       skills: [
         {
-          name: 'JavaScript',
-          icon: 'icon-[skill-icons--javascript]',
-          url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+          name: 'ChatGPT',
+          icon: 'icon-[logos--openai-icon]',
+          url: 'https://chatgpt.com/',
         },
         {
-          name: 'CSS',
-          icon: 'icon-[skill-icons--css]',
-          url: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+          name: 'DeepSeek',
+          icon: 'icon-[logos--deepseek-icon]',
+          url: 'https://chat.deepseek.com/',
         },
         {
-          name: 'HTML',
-          icon: 'icon-[skill-icons--html]',
-          url: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
-        },
-        {
-          name: 'TypeScript',
-          icon: 'icon-[skill-icons--typescript]',
-          url: 'https://www.typescriptlang.org/',
-        },
-        {
-          name: 'Vue',
-          icon: 'icon-[skill-icons--vuejs-dark]',
-          url: 'https://vuejs.org/',
-        },
-        {
-          name: 'Sass',
-          icon: 'icon-[skill-icons--sass]',
-          url: 'https://sass-lang.com/',
+          name: '豆包',
+          icon: 'icon-[simple-icons--bytedance]',
+          url: 'https://www.doubao.com/',
         },
       ],
     },
@@ -136,69 +126,14 @@ export const SKILLSSHOWCASE_CONFIG: SkillsShowcaseConfig = {
       direction: 'right',
       skills: [
         {
-          name: 'Astro',
-          icon: 'icon-[skill-icons--astro]',
-          url: 'https://astro.build/',
+          name: 'Ollama',
+          icon: 'icon-[simple-icons--ollama]',
+          url: 'https://ollama.com/',
         },
         {
-          name: 'Node.js',
-          icon: 'icon-[skill-icons--nodejs-dark]',
-          url: 'https://nodejs.org/',
-        },
-        {
-          name: 'React',
-          icon: 'icon-[skill-icons--react-dark]',
-          url: 'https://react.dev/',
-        },
-        {
-          name: 'Next.js',
-          icon: 'icon-[skill-icons--nextjs-dark]',
-          url: 'https://nextjs.org/',
-        },
-        {
-          name: 'Tailwind CSS',
-          icon: 'icon-[skill-icons--tailwindcss-dark]',
-          url: 'https://tailwindcss.com/',
-        },
-        {
-          name: 'Vite',
-          icon: 'icon-[skill-icons--vite-dark]',
-          url: 'https://vitejs.dev/',
-        },
-      ],
-    },
-    {
-      direction: 'left',
-      skills: [
-        {
-          name: 'Ubuntu',
-          icon: 'icon-[skill-icons--ubuntu-dark]',
-          url: 'https://ubuntu.com/',
-        },
-        {
-          name: 'Git',
-          icon: 'icon-[skill-icons--git]',
-          url: 'https://git-scm.com/',
-        },
-        {
-          name: 'MongoDB',
-          icon: 'icon-[skill-icons--mongodb]',
-          url: 'https://www.mongodb.com/',
-        },
-        {
-          name: 'Vercel',
-          icon: 'icon-[skill-icons--vercel-dark]',
-          url: 'https://vercel.com/',
-        },
-        {
-          name: 'VS Code',
-          icon: 'icon-[skill-icons--vscode-dark]',
-          url: 'https://code.visualstudio.com/',
-        },
-        {
-          name: 'Obsidian',
-          icon: 'icon-[skill-icons--obsidian-dark]',
-          url: 'https://obsidian.md/',
+          name: 'Cursor',
+          icon: 'icon-[simple-icons--cursor]',
+          url: 'https://cursor.com/',
         },
       ],
     },
@@ -215,16 +150,16 @@ export const SKILLSSHOWCASE_CONFIG: SkillsShowcaseConfig = {
 
 export const GITHUB_CONFIG: GithubConfig = {
   ENABLED: true,
-  GITHUB_USERNAME: 'Dnzzk2',
+  GITHUB_USERNAME: 'junaoee',
   TOOLTIP_ENABLED: true,
 }
 
 //--- Posts Page Config ---
 export const POSTS_CONFIG: PostConfig = {
-  title: 'Posts',
-  description: 'Posts by Dnzzk2',
-  introduce: 'Here, I will share the usage instructions for this theme to help you quickly use it.',
-  author: 'Dnzzk2',
+  title: '文章',
+  description: '全部文章',
+  introduce: '这里记录我的阅读、技术与日常。',
+  author: 'junaoe',
   homePageConfig: {
     size: 2,
     type: 'compact',
@@ -241,27 +176,42 @@ export const POSTS_CONFIG: PostConfig = {
   ogImageUseCover: false,
   postType: 'metaOnly',
   imageDarkenInDark: true,
-  readMoreText: 'Read more',
-  prevPageText: 'Previous',
-  nextPageText: 'Next',
-  tocText: 'On this page',
-  backToPostsText: 'Back to Posts',
-  nextPostText: 'Next Post',
-  prevPostText: 'Previous Post',
-  recommendText: 'REC',
+  readMoreText: '阅读全文',
+  prevPageText: '上一页',
+  nextPageText: '下一页',
+  tocText: '目录',
+  backToPostsText: '返回文章列表',
+  nextPostText: '下一篇',
+  prevPostText: '上一篇',
+  recommendText: '推荐',
   wordCountView: true,
 }
 
 export const COMMENT_CONFIG: CommentConfig = {
   enabled: true,
-  system: 'gitalk',
+  system: 'giscus',
+  // giscus 配置：repo / category 字段需要 giscus.app 生成，
+  // repoId 与 categoryId 是 GitHub 内部 ID，会随仓库/分类变化，升级时需重新取
+  giscus: {
+    repo: 'junaoee/blog',
+    repoId: 'R_kgDOVKf33w',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDOVKf3384DIfHp',
+    mapping: 'pathname', // 用页面路径做唯一标识，一篇文章对应一个讨论
+    strict: '1', // 严格模式：路径必须完全一致，防止不同文章的评论串台
+    reactionsEnabled: '1', // 开启表情回应
+    emitMetadata: '0', // 访客嵌入 iframe 时代替页面元信息
+    inputPosition: 'bottom', // 输入框放在评论列表下方
+    lang: 'zh-CN',
+    loading: 'lazy',
+  },
   gitalk: {
     clientID: import.meta.env.PUBLIC_GITHUB_CLIENT_ID,
     clientSecret: import.meta.env.PUBLIC_GITHUB_CLIENT_SECRET,
     repo: 'gitalk-comment',
-    owner: 'Dnzzk2',
-    admin: ['Dnzzk2'],
-    language: 'en-US',
+    owner: '',
+    admin: [],
+    language: 'zh-CN',
     perPage: 5,
     pagerDirection: 'last',
     createIssueManually: false,
@@ -271,26 +221,26 @@ export const COMMENT_CONFIG: CommentConfig = {
 }
 
 export const TAGS_CONFIG: TagsConfig = {
-  title: 'Tags',
-  description: 'All tags of Posts',
-  introduce: 'All the tags for posts are here, you can click to filter them.',
+  title: '标签',
+  description: '全部标签',
+  introduce: '所有文章的标签都在这里，点击可以筛选。',
 }
 
 export const PROJECTS_CONFIG: ProjectConfig = {
-  title: 'Projects',
-  description: 'The examples of my projects.',
-  introduce: 'The examples of my projects.',
+  title: '项目',
+  description: '我做过的一些东西。',
+  introduce: '这里放我的个人项目。',
 }
 
 export const PHOTOS_CONFIG: PhotosConfig = {
-  title: 'Photos',
-  description: 'Here I will record some photos taken in daily life.',
-  introduce: 'Here I will record some photos taken in daily life.',
+  title: '相册',
+  description: '记录日常的照片。',
+  introduce: '平时拍的一些照片。',
 }
 
 export const ANALYTICS_CONFIG: AnalyticsConfig = {
   vercount: {
-    enabled: true,
+    enabled: false,
   },
   umami: {
     enabled: false,

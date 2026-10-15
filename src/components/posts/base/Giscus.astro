@@ -1,0 +1,114 @@
+---
+import { COMMENT_CONFIG } from '~/config'
+
+interface Props {
+  id: string
+  title: string
+}
+
+const { id } = Astro.props
+const { giscus } = COMMENT_CONFIG
+
+// giscus 配置只能从脚本标签的 data-* 属性读取（见 giscus client.js 的 document.currentScript），
+// 所以这些值要在组件里带着，运行时再由下面的脚本注入到真正的 script 标签上
+const term = giscus?.mapping === 'specific' ? id : ''
+const configured = Boolean(giscus?.repoId && giscus?.categoryId)
+---
+
+<div id="giscus-container" data-term={term} class="giscus"></div>
+<noscript>评论区需要开启 JavaScript 才能显示。</noscript>
+
+<script>
+  import { COMMENT_CONFIG } from '~/config'
+
+  const g = COMMENT_CONFIG.giscus
+  const CONTAINER_ID = 'giscus-container'
+  const GISCUS_ORIGIN = 'https://giscus.app'
+
+  function currentTheme(): string {
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  }
+
+  /**
+   * 注入 giscus 客户端脚本。
+   * giscus client.js 通过 document.currentScript.dataset 读取配置，
+   * 因此必须用真正的 <script data-*> 标签，不能走别的 API。
+   */
+  function inject() {
+    const container = document.getElementById(CONTAINER_ID)
+    if (!container || !g?.repoId || !g?.categoryId) return
+
+    // 每次都清干净再注入，保证重复调用（首屏 + astro:page-load）不会叠加出多个 iframe
+    container.innerHTML = ''
+    container.previousElementSibling?.remove()
+
+    const script = document.createElement('script')
+    script.src = `${GISCUS_ORIGIN}/client.js`
+    script.async = true
+    script.crossOrigin = 'anonymous'
+
+    const attrs: Record<string, string | undefined> = {
+      'data-repo': g.repo,
+      'data-repo-id': g.repoId,
+      'data-category': g.category,
+      'data-category-id': g.categoryId,
+      'data-mapping': g.mapping ?? 'pathname',
+      'data-strict': g.strict ?? '1',
+      'data-reactions-enabled': g.reactionsEnabled ?? '1',
+      'data-emit-metadata': g.emitMetadata ?? '0',
+      'data-input-position': g.inputPosition ?? 'bottom',
+      'data-theme': currentTheme(),
+      'data-lang': g.lang ?? 'zh-CN',
+      'data-loading': g.loading ?? 'lazy',
+      'data-term': g.mapping === 'specific' ? container.dataset.term ?? '' : undefined,
+    }
+    for (const [key, value] of Object.entries(attrs)) {
+      if (value !== undefined) script.setAttribute(key, value)
+    }
+
+    // 放在容器后面：client.js 会找到 .giscus 容器，把 iframe 塞进去
+    container.insertAdjacentElement('afterend', script)
+  }
+
+  /** 明暗模式变了就重新注入，因为 data-theme 是渲染时写死的 */
+  let lastTheme = currentTheme()
+  let themeObserver: MutationObserver | null = null
+
+  function syncTheme() {
+    const next = currentTheme()
+    if (next === lastTheme) return
+    lastTheme = next
+    inject()
+  }
+
+  function watchTheme() {
+    themeObserver?.disconnect()
+    lastTheme = currentTheme()
+    themeObserver = new MutationObserver(syncTheme)
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+  }
+
+  function onPageLoad() {
+    // Astro 客户端路由会替换整个 html 元素，监听器要重新挂到新元素上
+    watchTheme()
+    inject()
+  }
+
+  function cleanup() {
+    themeObserver?.disconnect()
+    themeObserver = null
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onPageLoad)
+  } else {
+    onPageLoad()
+  }
+
+  document.addEventListener('astro:page-load', onPageLoad)
+  document.addEventListener('astro:before-preparation', cleanup)
+  window.addEventListener('beforeunload', cleanup)
+</script>
