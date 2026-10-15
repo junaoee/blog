@@ -27,38 +27,38 @@ export const SITE: Site = {
 
 export const HEADER_LINKS: Link[] = [
   {
-    name: '文章',
+    name: 'Posts',
     url: '/posts',
   },
   {
-    name: '项目',
+    name: 'Projects',
     url: '/projects',
   },
   {
-    name: '相册',
+    name: 'Photos',
     url: '/photos',
   },
 ]
 
 export const FOOTER_LINKS: Link[] = [
   {
-    name: '首页',
+    name: 'Readme',
     url: '/',
   },
   {
-    name: '文章',
+    name: 'Posts',
     url: '/posts',
   },
   {
-    name: '项目',
+    name: 'Projects',
     url: '/projects',
   },
   {
-    name: '标签',
+    name: 'Tags',
     url: '/tags',
   },
   {
-    name: '相册',
+    name: 'Photos',
     url: '/photos',
   },
 ]

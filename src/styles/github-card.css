@@ -57,7 +57,7 @@
 }
 
 .gc-user {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1rem;
   color: hsl(var(--muted-foreground));
   overflow: hidden;
@@ -67,13 +67,13 @@
 
 .gc-divider {
   color: hsl(var(--muted-foreground) / 0.6);
-  font-weight: 300;
+  font-weight: 200;
   font-size: 1rem;
   flex-shrink: 0;
 }
 
 .gc-repo {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;

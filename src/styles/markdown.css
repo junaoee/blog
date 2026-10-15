@@ -74,7 +74,7 @@
   & :is(h1, h2, h3, h4, h5, h6) {
     color: var(--color-heading);
     font-family: var(--font-sans);
-    font-weight: 600;
+    font-weight: 500;
     scroll-margin-top: 6rem;
 
     /* 统一的标题锚点样式 */
@@ -137,7 +137,7 @@
   }
 
   & :is(strong, b) {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-text-primary);
   }
 
@@ -182,7 +182,7 @@
     content: counter(list-item) '.';
     position: absolute;
     inset-inline-start: 0;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   /* 无序列表 */
@@ -239,7 +239,7 @@
 /* ===== 引用块样式 ===== */
 .markdown {
   & blockquote {
-    font-weight: 500;
+    font-weight: 400;
     font-style: italic;
     color: inherit;
     border-inline-start: 0.25rem solid var(--color-border-blockquote);
@@ -278,7 +278,7 @@
     font-family: var(--font-geist-mono);
     font-size: 0.875em;
     word-wrap: break-word;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   /* 代码块 */
@@ -294,7 +294,7 @@
       background-color: transparent;
       border: none !important;
       padding: 0;
-      font-weight: 400;
+      font-weight: 300;
       color: inherit;
       font-size: inherit;
       font-family: inherit;
@@ -376,7 +376,7 @@
 
   & thead {
     color: var(--color-text-primary);
-    font-weight: 600;
+    font-weight: 500;
     border-block-end: 1px solid var(--color-border-light);
 
     & th {
